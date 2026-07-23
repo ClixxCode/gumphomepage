@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gump, Faiella &amp; Bugalski — Homepage Pivot Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#6D1C73;
+    --purple-dark:#5A315D;
+    --navy:#2E4A7D;
+    --navy-deep:#14233F;
+    --navy-band:#1B2B4B;
+    --ink:#001323;
+    --bg:#FFFFFF;
+    --bg-alt:#F3F5F8;
+    --border:#CCCCCC;
+    --muted:#5b6472;
+    --head:"Martel", Georgia, serif;
+    --body:"Lora", Georgia, serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,.head{font-family:var(--head);color:var(--ink);line-height:1.15;font-weight:800}
+  a{color:var(--ink);text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .btn{display:inline-block;background:var(--purple);color:#fff;font-family:var(--head);font-weight:700;
+       padding:15px 30px;border:2px solid var(--purple);border-radius:0;letter-spacing:.3px;
+       text-transform:uppercase;font-size:15px;transition:.18s;cursor:pointer}
+  .btn:hover{background:var(--purple-dark);border-color:var(--purple-dark);color:#fff}
+  .btn-ghost{background:transparent;color:#fff;border-color:#fff}
+  .btn-ghost:hover{background:#fff;color:var(--purple)}
+  .btn-sm{padding:10px 16px;font-size:12.5px}
+  .socials{display:flex;gap:10px;margin-top:16px}
+  .socials a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;transition:.18s}
+  .socials a:hover{background:var(--purple)}
+  .socials svg{width:16px;height:16px;fill:#fff}
+  .eyebrow{font-family:var(--head);text-transform:uppercase;letter-spacing:2px;font-size:14px;font-weight:700;color:var(--purple)}
+
+  /* ===== Review banner / annotation system ===== */
+  #reviewbar{position:sticky;top:0;z-index:120;background:var(--ink);color:#fff;font-family:var(--head);
+       font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:18px;padding:9px 16px;flex-wrap:wrap}
+  #reviewbar strong{color:#f2c94c;font-weight:700}
+  #reviewbar button{font-family:var(--head);font-size:12.5px;font-weight:700;background:var(--purple);color:#fff;
+       border:none;padding:6px 14px;border-radius:3px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px}
+  #reviewbar button:hover{background:var(--purple-dark)}
+  .note{display:none;background:#FFF7E6;border:1px solid #F2C94C;border-left:5px solid #E0A500;
+       border-radius:4px;padding:12px 16px;margin:16px auto 0;max-width:1180px;font-size:14.5px;line-height:1.55;color:#4a3c00}
+  .note b{color:#8a6d00}
+  .note.flag{background:#FDECEC;border-color:#E57373;border-left-color:#C62828;color:#7a1c1c}
+  .note.flag b{color:#9a1414}
+  body.shownotes .note{display:block}
+  .note-tag{display:none}
+  body.shownotes .note-tag{display:inline-block;background:#E0A500;color:#fff;font-family:var(--head);
+       font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;letter-spacing:.5px}
+
+  /* ===== Top utility bar ===== */
+  .topbar{background:var(--navy-deep);color:#cfd8e6;font-size:13.5px}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;min-height:42px;flex-wrap:wrap;gap:6px}
+  .topbar a{color:#cfd8e6}
+  .topbar a:hover{color:#fff}
+  .topbar .tel{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--head);font-weight:600}
+  .topbar .tel b{color:#fff;font-weight:700}
+  .topbar .util{display:flex;gap:18px;align-items:center}
+
+  /* ===== Header / nav ===== */
+  header.site{background:#fff;border-bottom:1px solid #e7eaf0;position:relative;z-index:90}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:96px;gap:20px}
+  .logo img{height:62px;width:auto}
+  nav.main{display:flex;align-items:center;gap:16px}
+  nav.main > ul{list-style:none;display:flex;gap:17px;align-items:center}
+  nav.main > ul > li > a{font-family:var(--head);font-weight:700;font-size:13.5px;text-transform:uppercase;
+       letter-spacing:.3px;padding:36px 0;display:inline-block;position:relative;white-space:nowrap}
+  nav.main > ul > li > a:hover{color:var(--purple)}
+  nav.main > ul > li.has-mega > a::after{content:"▾";font-size:11px;margin-left:6px;color:var(--purple)}
+
+  /* Mega menu */
+  .mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:3px solid var(--purple);
+       box-shadow:0 24px 50px rgba(0,19,35,.16);padding:30px 0 34px;display:none}
+  li.has-mega:hover .mega{display:block}
+  nav.main > ul > li.has-sub{position:relative}
+  nav.main > ul > li.has-sub > a::after{content:"▾";font-size:11px;margin-left:5px;color:var(--purple)}
+  .submenu{position:absolute;left:0;top:100%;background:#fff;border-top:3px solid var(--purple);
+       box-shadow:0 18px 40px rgba(0,19,35,.16);list-style:none;min-width:210px;padding:8px 0;display:none;z-index:95}
+  li.has-sub:hover .submenu{display:block}
+  .submenu li a{display:block;padding:9px 20px;font-family:var(--head);font-weight:600;font-size:14px;
+       text-transform:none;letter-spacing:0;color:#3a4356;white-space:nowrap}
+  .submenu li a:hover{color:var(--purple);background:var(--bg-alt)}
+  .mega .mega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px 32px;align-items:start;max-width:1180px;margin:0 auto;padding:0 24px}
+  .mega .col h4{white-space:normal}
+  .mega .col h4{font-size:16px;color:var(--purple);margin-bottom:10px;border-bottom:1px solid #ececf1;padding-bottom:8px;
+       font-family:var(--head);font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+  .mega .col h4 a{color:var(--purple)}
+  .mega .col ul{list-style:none}
+  .mega .col li{margin:5px 0}
+  .mega .col li a{font-size:14.5px;color:#3a4356}
+  .mega .col li a:hover{color:var(--purple)}
+  .mega .viewall{grid-column:1/-1;border-top:1px solid #ececf1;padding-top:14px;margin-top:2px}
+  .mega .viewall a{font-family:var(--head);font-weight:700;color:var(--purple);text-transform:uppercase;font-size:14px;letter-spacing:.5px}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;color:#fff;background:
+       linear-gradient(180deg,rgba(20,35,63,.80),rgba(20,35,63,.72)),
+       url('https://www.centralmolaw.com/wp-content/uploads/2024/08/front-view-blurry-lawyer-working-2-1.png') center 40%/cover no-repeat,
+       var(--navy-deep)}
+  .hero .wrap{padding:110px 24px 116px;max-width:1100px}
+  .hero .eyebrow{color:#e7b3ec}
+  .hero h1{color:#fff;font-size:58px;font-weight:800;margin:14px 0 22px;max-width:880px}
+  .hero p.sub{font-size:21px;line-height:1.6;max-width:760px;color:#eef2f8;margin-bottom:34px;font-weight:400}
+  .hero .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero .micro{font-family:var(--head);font-size:13.5px;letter-spacing:.5px;color:#cdd6e4;text-transform:uppercase;margin-left:6px}
+
+  /* ===== Section scaffolding ===== */
+  section{padding:78px 0}
+  .sec-head{text-align:center;max-width:820px;margin:0 auto 46px}
+  .sec-head h2{font-size:40px;margin:10px 0 0}
+  .alt{background:var(--bg-alt)}
+
+  /* ===== Practice tiles ===== */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .tile{background:#fff;border:1px solid #e7eaf0;border-top:4px solid var(--purple);padding:34px 30px 30px;
+       border-radius:3px;transition:.18s;display:flex;flex-direction:column}
+  .tile:hover{box-shadow:0 18px 40px rgba(0,19,35,.12);transform:translateY(-3px)}
+  .tile .ic{width:54px;height:54px;border-radius:50%;background:rgba(109,28,115,.10);color:var(--purple);
+       display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .tile .ic svg{width:28px;height:28px}
+  .tile h3{font-size:23px;margin-bottom:12px}
+  .tile p{font-size:16px;color:#3a4356;line-height:1.6;margin-bottom:18px;flex:1}
+  .tile .more{font-family:var(--head);font-weight:700;color:var(--purple);text-transform:uppercase;
+       font-size:13.5px;letter-spacing:.5px}
+  .tile .more:hover{color:var(--purple-dark)}
+  .tile .pi-line{font-family:var(--head);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px}
+
+  .intro-para{max-width:900px;margin:48px auto 0;text-align:center;font-size:19px;color:#33405a;line-height:1.7}
+
+  /* ===== 120 years / proof ===== */
+  .proof{background:var(--navy-deep);color:#fff}
+  .proof .grid{display:grid;grid-template-columns:1fr 1.12fr;gap:54px;align-items:center}
+  .proof .eyebrow{color:#e7b3ec}
+  .proof h2{color:#fff;font-size:36px;margin:10px 0 18px}
+  .proof p{color:#e3e9f2;font-size:18px;line-height:1.7;margin-bottom:24px}
+  .proof-photo img{width:100%;border-radius:8px;box-shadow:0 24px 55px rgba(0,0,0,.40);object-fit:cover}
+  .counter-inline{display:flex;align-items:center;gap:18px;background:linear-gradient(160deg,var(--purple),#3a1140);
+       border-radius:8px;padding:22px 28px;margin-bottom:26px;box-shadow:0 16px 40px rgba(0,0,0,.28)}
+  .counter-inline .num{font-family:var(--head);font-weight:900;font-size:58px;line-height:1;color:#fff;white-space:nowrap}
+  .counter-inline .num small{font-size:26px;vertical-align:super}
+  .counter-inline .lbl{font-family:var(--head);font-weight:600;font-size:17px;color:#f0d6f3;letter-spacing:.3px;line-height:1.25}
+  /* ===== Associations / badges strip ===== */
+  .assoc{background:#fff;padding:54px 0;border-top:1px solid #e7eaf0}
+  .assoc .eyebrow{display:block;text-align:center;margin-bottom:6px}
+  .assoc h3{text-align:center;font-size:26px;margin-bottom:30px}
+  .badges{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap}
+  .badges img{height:118px;width:auto}
+
+  /* ===== Testimonials ===== */
+  .tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .tcard{background:#fff;border:1px solid #e7eaf0;border-radius:4px;padding:30px 28px}
+  .tcard .stars{color:#E0A500;font-size:18px;letter-spacing:2px;margin-bottom:12px}
+  .tcard p{font-size:16px;color:#3a4356;font-style:italic;line-height:1.6;margin-bottom:16px}
+  .tcard .who{font-family:var(--head);font-weight:700;font-size:15px;color:var(--ink)}
+  .placeholder{color:#9aa3b2 !important;font-style:italic}
+
+  /* ===== Consultation form ===== */
+  .consult .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:start}
+  .consult h2{font-size:36px;margin-bottom:14px}
+  .consult p.lead{font-size:18px;color:#33405a;margin-bottom:20px}
+  .consult ul.assure{list-style:none;margin-top:18px}
+  .consult ul.assure li{position:relative;padding-left:30px;margin:10px 0;font-size:16px;color:#33405a}
+  .consult ul.assure li::before{content:"✓";position:absolute;left:0;top:0;color:var(--purple);font-weight:900;font-family:var(--head)}
+  form.lead{background:#fff;border:1px solid #e7eaf0;border-top:4px solid var(--purple);border-radius:4px;padding:32px}
+  form.lead .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  form.lead label{display:block;font-family:var(--head);font-size:13px;font-weight:700;text-transform:uppercase;
+       letter-spacing:.5px;color:var(--ink);margin:14px 0 6px}
+  form.lead input,form.lead textarea{width:100%;border:1px solid var(--border);border-radius:0;padding:12px 13px;
+       font-family:var(--body);font-size:16px;color:#333;background:#fff}
+  form.lead textarea{min-height:120px;resize:vertical}
+  form.lead .btn{width:100%;margin-top:22px;text-align:center}
+  form.lead .disclaimer{font-size:12px;color:#8a93a3;margin-top:12px;line-height:1.5}
+
+  /* ===== Footer ===== */
+  footer.site{background:var(--navy-deep);color:#c4cde0;font-size:15px;padding-top:60px}
+  footer.site .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:38px;padding-bottom:46px}
+  footer.site img.flogo{height:78px;margin-bottom:18px}
+  footer.site h4{font-family:var(--head);color:#fff;font-size:16px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px}
+  footer.site ul{list-style:none}
+  footer.site li{margin:8px 0}
+  footer.site a{color:#c4cde0}
+  footer.site a:hover{color:#fff}
+  footer.site .office{margin-bottom:18px;line-height:1.55}
+  footer.site .office b{color:#fff;font-family:var(--head)}
+  .footbar{border-top:1px solid rgba(255,255,255,.12);padding:20px 0;font-size:13px;color:#90a0bd}
+  .footbar .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:980px){
+    nav.main{display:none}
+    .hero h1{font-size:42px}
+    .hero .wrap{padding:80px 24px}
+    .tiles,.tcards{grid-template-columns:1fr 1fr}
+    .proof .grid,.consult .grid{grid-template-columns:1fr;gap:34px}
+    footer.site .cols{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:620px){
+    .tiles,.tcards,form.lead .row,footer.site .cols{grid-template-columns:1fr}
+    .hero h1{font-size:34px}
+    .sec-head h2,.proof h2,.consult h2{font-size:28px}
+  }
+</style>
+</head>
+<body class="shownotes">
+
+<!-- REVIEW BANNER (mockup only — not part of the page) -->
+<div id="reviewbar">
+  <span><strong>MOCKUP</strong> · GFB Homepage &amp; Navigation Pivot — for client review</span>
+  <button onclick="document.body.classList.toggle('shownotes')">Toggle change notes</button>
+</div>
+
+<!-- ===== TOP UTILITY BAR ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="tel">
+      <a href="tel:6602633100"><b>Moberly:</b> 660-263-3100</a>
+      <a href="tel:5738182646"><b>Columbia:</b> 573-818-2646</a>
+      <a href="tel:8002643455"><b>National Toll Free:</b> 800-264-3455</a>
+    </div>
+    <div class="util">
+      <a href="#consult">Request a Consultation</a>
+    </div>
+  </div>
+</div>
+<!-- ===== HEADER / NAV ===== -->
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#"><img src="https://www.centralmolaw.com/wp-content/uploads/2024/07/Logo.png" alt="Gump, Faiella &amp; Bugalski, LLC"></a>
+    <nav class="main">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li class="has-sub"><a href="#">About</a>
+          <ul class="submenu">
+            <li><a href="#">About the Firm</a></li>
+            <li><a href="#">Our Attorneys</a></li>
+            <li><a href="#">Our Team</a></li>
+          </ul>
+        </li>
+        <li class="has-mega">
+          <a href="#">Practice Areas</a>
+          <div class="mega">
+            <div class="mega-grid">
+              <div class="col">
+                <h4><a href="/services/family-law/">Family Law</a></h4>
+                <ul>
+                  <li><a href="#">Divorce</a></li>
+                  <li><a href="#">Child Custody</a></li>
+                  <li><a href="#">Child Support</a></li>
+                  <li><a href="#">Property Division</a></li>
+                  <li><a href="#">Adoption</a></li>
+                  <li><a href="#">Domestic Violence</a></li>
+                  <li><a href="#">Guardianship</a></li>
+                  <li><a href="#">Legal Separation</a></li>
+                  <li><a href="#">Paternity</a></li>
+                  <li><a href="#">Alimony / Spousal Support</a></li>
+                  <li><a href="#">Visitation Rights</a></li>
+                </ul>
+              </div>
+              <div class="col" style="grid-column:span 2">
+                <h4><a href="/services/personal-injury/">Personal Injury</a></h4>
+                <ul style="columns:2">
+                  <li><a href="#">Medical Malpractice</a></li>
+                  <li><a href="#">Nursing Home Neglect</a></li>
+                  <li><a href="#">Wrongful Death</a></li>
+                  <li><a href="#">Premises Liability</a></li>
+                  <li><a href="#">Negligent Security</a></li>
+                  <li><a href="#">Brain Injury</a></li>
+                  <li><a href="#">Spinal Cord Injury</a></li>
+                  <li><a href="#">Paralysis</a></li>
+                  <li><a href="#">Drowning</a></li>
+                  <li><a href="#">Electrocutions &amp; Burns</a></li>
+                  <li><a href="#">Injuries to Children</a></li>
+                  <li><a href="#">Product Liability</a></li>
+                  <li><a href="#">Mesothelioma</a></li>
+                  <li><a href="#">Sports-Related Injuries</a></li>
+                  <li><a href="#">Federal Tort Claims</a></li>
+                  <li><a href="#">Explosions in the Workplace</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <h4><a href="/services/personal-injury/auto-accidents/">Auto Accidents</a></h4>
+                <ul>
+                  <li><a href="#">Car Accidents</a></li>
+                  <li><a href="#">Truck Accidents</a></li>
+                  <li><a href="#">Motorcycle Accidents</a></li>
+                  <li><a href="#">Distracted Driving</a></li>
+                  <li><a href="#">Reckless Driving</a></li>
+                  <li><a href="#">Underinsured Motorist Coverage</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <h4><a href="/services/criminal-traffic/">Criminal &amp; Traffic</a></h4>
+                <p style="font-size:13.5px;color:#5b6472;line-height:1.55;margin-top:4px">DWI &amp; DUI defense, traffic violations, driving while suspended, drug charges, expungements, and orders of protection.</p>
+              </div>
+              <div class="col">
+                <h4><a href="/services/estate-planning-litigation/">Estate Planning &amp; Probate</a></h4>
+                <ul>
+                  <li><a href="#">Estate Planning</a></li>
+                  <li><a href="#">Wills &amp; Trusts</a></li>
+                  <li><a href="#">Probate Administration</a></li>
+                  <li><a href="#">Inheritance Litigation</a></li>
+                </ul>
+              </div>
+              <div class="col" style="grid-column:span 2">
+                <h4><a href="/services/business-law/">Business &amp; Insurance Law</a></h4>
+                <ul style="columns:2">
+                  <li><a href="#">Business Law</a></li>
+                  <li><a href="#">Business Litigation</a></li>
+                  <li><a href="#">Contract Disputes</a></li>
+                  <li><a href="#">Insurance Law</a></li>
+                  <li><a href="#">Insurance Bad Faith</a></li>
+                  <li><a href="#">Insurance Claims &amp; Bad Faith</a></li>
+                  <li><a href="#">Policyholder Insurance Claim Disputes</a></li>
+                  <li><a href="#">Business Insurance Claims</a></li>
+                  <li><a href="#">Insurance Agent &amp; Broker Negligence</a></li>
+                  <li><a href="#">ERISA Insurance Claims</a></li>
+                  <li><a href="#">Life Insurance</a></li>
+                  <li><a href="#">Long-Term Disability Insurance Claims</a></li>
+                  <li><a href="#">Property Claims</a></li>
+                </ul>
+              </div>
+              <div class="viewall"><a href="/services/">View All Practice Areas →</a></div>
+            </div>
+          </div>
+        </li>
+        <li><a href="#">Results</a></li>
+        <li><a href="#">News</a></li>
+      </ul>
+      <a class="btn btn-sm" href="#consult">Request a Consultation</a>
+    </nav>
+  </div>
+</header>
+<div class="note"><b>NAV REBUILD (matches your doc).</b> Practice Areas reduced from 13 mixed top-level items to <b>6 buckets + “View All”</b>: Family Law, Personal Injury, Criminal &amp; Traffic, Auto Accidents, Estate Planning &amp; Probate, Business &amp; Insurance Law. Truck/Car Accidents sit under Auto Accidents; Negligent Security under Personal Injury; Civil Rights pulled from the nav; Other Practice Areas to redirect to /services/. About now nests Our Attorneys + a future Team page; Blog renamed News. No practice-area URLs changed. <span class="note-tag">SEO equity preserved</span></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div class="eyebrow">We get results</div>
+    <h1>Central Missouri Attorneys for Family Law, Personal Injury &amp; Criminal Defense</h1>
+    <p class="sub">Gump, Faiella &amp; Bugalski has represented Central Missouri clients in complex civil and criminal cases for decades. We take the cases other firms won’t.</p>
+    <div class="cta-row">
+      <a class="btn" href="#consult">Request a Consultation</a>
+      <a class="btn btn-ghost" href="#consult">Tell Us About Your Case</a>
+    </div>
+  </div>
+</section>
+<div class="note"><b>HERO REPOSITION.</b> Old H1 “Missouri Personal Injury &amp; Trial Attorneys” → approved <b>“Central Missouri Attorneys for Family Law, Personal Injury &amp; Criminal Defense.”</b> Eyebrow “We get results” kept; client-supplied tagline in place (used instead of doc Option A). Per the client call, hero CTAs drive to the consultation form, not a phone call. PI-specific “free consultation” language stays on the PI tile and PI page, not the hero.</div>
+
+<!-- ===== PRACTICE AREAS / TILES ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Our Services</div>
+      <h2>Areas of Practice &amp; Services We Provide</h2>
+    </div>
+    <div class="tiles">
+
+      <!-- 1 Family Law -->
+      <div class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.6-9.2-8.4C1.2 9.7 2.6 6 6 6c2 0 3.2 1.2 4 2.4C10.8 7.2 12 6 14 6c3.4 0 4.8 3.7 3.2 6.6C19 16.4 12 21 12 21z"/></svg></div>
+        <h3>Family Law</h3>
+        <p>Divorce, contested custody, high-asset and silver divorce, mediation, paternity, and modifications. The firm’s family law team handles the matters most attorneys would rather not, including the contested trials and the high-net-worth property fights.</p>
+        <a class="more" href="/services/family-law/">Learn more →</a>
+      </div>
+
+      <!-- 2 Personal Injury -->
+      <div class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/><path d="M5 22v-6l-2-1 2-5a4 4 0 0 1 4-2h6a4 4 0 0 1 4 2l2 5-2 1v6"/></svg></div>
+        <h3>Personal Injury</h3>
+        <p>Representing people seriously hurt by someone else’s negligence. Auto and truck wrecks, premises liability, medical malpractice, wrongful death, and product liability.</p>
+        <div class="pi-line">Free consultation · No fee unless we recover</div>
+        <a class="more" href="/services/personal-injury/">Learn more →</a>
+      </div>
+
+      <!-- 3 Criminal & Traffic -->
+      <div class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M5 7l14 0M7 7l-3 6a3 3 0 0 0 6 0L7 7zm10 0l-3 6a3 3 0 0 0 6 0l-3-6z"/></svg></div>
+        <h3>Criminal &amp; Traffic Defense</h3>
+        <p>DWI and DUI defense, traffic violations, driving while suspended, drug charges, expungements, and orders of protection. Practical defense that protects records, licenses, immigration status, and employment.</p>
+        <a class="more" href="/services/criminal-traffic/">Learn more →</a>
+      </div>
+
+      <!-- 4 Auto Accidents -->
+      <div class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 13l2-5a3 3 0 0 1 3-2h8a3 3 0 0 1 3 2l2 5v5h-3v-2H6v2H3v-5z"/><circle cx="7" cy="16" r="1.4"/><circle cx="17" cy="16" r="1.4"/></svg></div>
+        <h3>Auto Accidents</h3>
+        <p>Car, truck, motorcycle, and commercial vehicle wrecks across Central Missouri — from property-damage-only claims to catastrophic injury and wrongful death cases involving federally regulated trucking.</p>
+        <a class="more" href="/services/personal-injury/auto-accidents/">Learn more →</a>
+      </div>
+
+      <!-- 5 Estate Planning & Probate -->
+      <div class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l3 3v15H6zM15 3v3h3"/><path d="M9 11h6M9 14h6M9 17h4"/></svg></div>
+        <h3>Estate Planning &amp; Probate</h3>
+        <p>Wills, trusts, powers of attorney, healthcare directives, probate administration, and contested estate matters. Planning for what comes next — and resolving disputes when planning didn’t hold up.</p>
+        <a class="more" href="/services/estate-planning-litigation/">Learn more →</a>
+      </div>
+
+      <!-- 6 Business & Insurance -->
+      <div class="tile">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg></div>
+        <h3>Business &amp; Insurance Law</h3>
+        <p>Contract disputes, business litigation, insurance bad faith, denied claims, policyholder disputes, and ERISA matters. Counsel for Central Missouri business owners and policyholders who need someone to push back.</p>
+        <a class="more" href="/services/business-law/">Learn more →</a>
+      </div>
+
+    </div>
+
+    <p class="intro-para">Gump, Faiella &amp; Bugalski has represented Central Missouri families and businesses for more than 90 years. From divorce and custody cases to personal injury claims, criminal defense, business disputes, and insurance bad faith, our attorneys handle the matters that affect people’s lives, livelihoods, and futures. Many of our clients come to us after another firm turned them down, or after realizing their case needs an attorney willing to take it to trial. We’re built for that work.</p>
+  </div>
+</section>
+<div class="note"><b>TILES: 8 → 6, reordered.</b> Family Law leads (most lawyers, most growth). PI second; Auto Accidents keeps its own tile because it converts; Criminal third for visibility. Estate Planning + Probate consolidated; Business + Insurance consolidated. The PI promise (“Free consultation · No fee unless we recover”) lives only on the PI tile, not site-wide. The below-tiles paragraph is rewritten from the old PI-only “Have you been injured…” intro to a general-practice scope. <span class="note-tag">PI tile copy flagged for Chris</span></div>
+
+<!-- ===== 120 YEARS / PROOF ===== -->
+<section class="proof">
+  <div class="wrap">
+    <div class="grid">
+      <div class="proof-photo">
+        <img src="https://www.centralmolaw.com/wp-content/uploads/2026/03/GFB-Law.png" alt="Attorneys of Gump, Faiella &amp; Bugalski, LLC">
+      </div>
+      <div>
+        <div class="eyebrow">Why clients choose us</div>
+        <h2>Backed by Over 120 Years of Collective Legal Experience</h2>
+        <p>Over 90 years serving Central Missouri, backed by more than 120 years of combined attorney experience. Across family law, personal injury, criminal defense, business litigation, and estate matters, we have handled thousands of Central Missouri cases. We investigate thoroughly, prepare every case as if it’s going to trial, and tell our clients straight what the case is worth and what it will take to get there.</p>
+        <div class="counter-inline">
+          <div class="num"><small>$</small>250<small> M+</small></div>
+          <div class="lbl">Million recovered<br>for our clients</div>
+        </div>
+        <a class="btn" href="#consult">Request a Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="note"><b>“120 YEARS” REWRITE.</b> Lede broadened from PI-only to full practice scope, and the 90-vs-120 numbers are now framed explicitly (“Over 90 years serving Central Missouri, backed by more than 120 years of combined attorney experience”) so they don’t read as a contradiction. The two PI bullets are removed from this trust block (doc Option A); that message lives on the PI tile and PI page. The verified “$250 Million recovered” counter and award badges are kept.</div>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Client experiences</div>
+      <h2>What Our Clients Say About Us</h2>
+    </div>
+    <div class="tcards">
+      <div class="tcard"><div class="stars">★★★★★</div><p class="placeholder">[Pull existing 5-star review #1 from the live site / Google profile — not fabricated here.]</p><div class="who placeholder">[Client name / matter]</div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="placeholder">[Pull existing 5-star review #2 from the live site / Google profile — not fabricated here.]</p><div class="who placeholder">[Client name / matter]</div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="placeholder">[Pull existing 5-star review #3 from the live site / Google profile — not fabricated here.]</p><div class="who placeholder">[Client name / matter]</div></div>
+    </div>
+    <div style="text-align:center;margin-top:34px"><a class="btn btn-sm" href="#">Read More Client Reviews →</a></div>
+  </div>
+</section>
+<div class="note"><b>TESTIMONIALS.</b> Kept on the homepage and now linked to a dedicated Reviews page (per your answer) via the “Read More Client Reviews” button and a Reviews link in the footer. Review text left as placeholders to carry over verbatim, not invented. [NEED: existing review text]</div>
+
+<!-- ===== CONSULTATION FORM ===== -->
+<section class="consult" id="consult">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">Get started</div>
+        <h2>Request a Consultation</h2>
+        <p class="lead">Tell us what’s going on. We’ll review your situation and tell you straight whether and how we can help — across family law, injury, criminal, business, and insurance matters.</p>
+        <ul class="assure">
+          <li>More than 90 years serving Central Missouri</li>
+          <li>Offices in Moberly and Columbia</li>
+          <li>Cases prepared as if they’re going to trial</li>
+        </ul>
+      </div>
+      <form class="lead" onsubmit="return false;">
+        <div class="row">
+          <div><label>First Name</label><input type="text" placeholder="First name"></div>
+          <div><label>Last Name</label><input type="text" placeholder="Last name"></div>
+        </div>
+        <div class="row">
+          <div><label>Email</label><input type="email" placeholder="you@email.com"></div>
+          <div><label>Phone</label><input type="tel" placeholder="(000) 000-0000"></div>
+        </div>
+        <label>How can we help?</label>
+        <textarea placeholder="Briefly describe your situation..."></textarea>
+        <button class="btn" type="submit">Request My Consultation</button>
+        <p class="disclaimer">Submitting this form does not create an attorney-client relationship. Do not include confidential or time-sensitive information.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ASSOCIATIONS / BADGES STRIP ===== -->
+<section class="assoc">
+  <div class="wrap">
+    <span class="eyebrow">Recognized &amp; rated</span>
+    <h3>Honors &amp; Professional Associations</h3>
+    <div class="badges">
+      <img src="https://www.centralmolaw.com/wp-content/uploads/2024/08/Phelps-Million-Dollar-Advocates-Membership-3-1.png" alt="Million Dollar Advocates Forum">
+      <img src="https://www.centralmolaw.com/wp-content/uploads/2024/08/awards-personal-injury-attorney-martindale-hubbell-av-rated-1.png" alt="Martindale-Hubbell AV Rated">
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="flogo" src="https://www.centralmolaw.com/wp-content/uploads/2024/07/gfp-logo-white-text-shadow-1.png" alt="Gump, Faiella &amp; Bugalski, LLC">
+        <div class="office"><b>Moberly Office</b><br>110 North Fifth Street<br>Moberly, MO 65270<br><a href="tel:6602633100">660-263-3100</a></div>
+        <div class="office"><b>Columbia Office</b><br>1000 W. Nifong Blvd., Building 2, Suite 220B<br>Columbia, MO 65203<br><a href="tel:5738182646">573-818-2646</a></div>
+        <div class="office"><b>National Toll Free:</b> <a href="tel:8002643455">800-264-3455</a></div>
+      </div>
+      <div>
+        <h4>Practice Areas</h4>
+        <ul>
+          <li><a href="/services/family-law/">Family Law</a></li>
+          <li><a href="/services/personal-injury/">Personal Injury</a></li>
+          <li><a href="/services/criminal-traffic/">Criminal &amp; Traffic</a></li>
+          <li><a href="/services/personal-injury/auto-accidents/">Auto Accidents</a></li>
+          <li><a href="/services/estate-planning-litigation/">Estate Planning &amp; Probate</a></li>
+          <li><a href="/services/business-law/">Business &amp; Insurance Law</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Our Attorneys</a></li>
+          <li><a href="#">Results</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#consult">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Help Now</h4>
+        <p style="color:#c4cde0;margin-bottom:16px;font-size:14.5px">No matter the matter, we’ll tell you straight whether and how we can help.</p>
+        <a class="btn btn-sm" href="#consult">Request a Consultation</a>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.9.3-1.5 1.6-1.5H16V5.1C15.7 5 14.7 5 13.6 5 11.2 5 9.6 6.4 9.6 9v2H7v3h2.6v8z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3l-6.6 7.5L21 21h-5.5l-4-5.3L6.8 21H3.7l7-8L3 3h5.6l3.6 4.8zm-1 16h1.7L8 4.7H6.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.5 8.5h-3V21h3zM5 3.5A1.75 1.75 0 105 7a1.75 1.75 0 000-3.5zM21 21h-3v-6.5c0-1.6-.6-2.5-1.9-2.5-1 0-1.6.7-1.9 1.4V21h-3V8.5h3v1.4c.4-.7 1.5-1.7 3.2-1.7 2.3 0 3.5 1.5 3.5 4.3z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footbar">
+    <div class="wrap">
+      <span>© 2026 Gump, Faiella &amp; Bugalski, LLC. All rights reserved.</span>
+      <span>Serving Moberly, Columbia &amp; Central Missouri</span>
+    </div>
+  </div>
+</footer>
+<div class="note"><b>FOOTER updated.</b> Practice block mirrors the new 6 tiles. Per client comments: removed the “Other Practice Areas” link, added social icons, and reduced the CTA size. Phone numbers confirmed official.</div>
+
+<script>
+  // Animate the $250M counter when it scrolls into view (mirrors the live Elementor counter)
+  const numEl = document.querySelector('.counter-inline .num');
+  let done = false;
+  function runCount(){
+    if(done) return;
+    const r = numEl.getBoundingClientRect();
+    if(r.top < window.innerHeight - 60){
+      done = true;
+      let v = 0;
+      const t = setInterval(()=>{ v += 6; if(v>=250){v=250; clearInterval(t);} numEl.innerHTML = '<small>$</small>'+v+'<small> M+</small>'; }, 18);
+    }
+  }
+  window.addEventListener('scroll', runCount); runCount();
+</script>
+</body>
+</html>
